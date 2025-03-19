@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from config.database import users_collection, tickets_collection
+from pymongo.mongo_client import MongoClient
 from models.ticket import Ticket
 from models.user import User
 from bson import ObjectId
@@ -18,6 +18,13 @@ import os
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 MONGO_URL = os.getenv("MONGO_URL")
+
+
+client = MongoClient(MONGO_URL)
+
+db = client["Advaita2025"]
+users_collection = db["users"]
+tickets_collection = db["tickets"]
 
 # Password Hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")

@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-# from config.database import users_collection, tickets_collection
+from config.database import users_collection, tickets_collection
 from models.ticket import Ticket
 from models.user import User
 from bson import ObjectId
@@ -9,13 +9,10 @@ import jwt
 import datetime
 from typing import Optional
 from pydantic import BaseModel, Field
-# from dotenv import load_dotenv
 import os
 
 
 
-# Load environment variables from .env file
-# load_dotenv()
 
 # Constants from .env
 SECRET_KEY = os.getenv("SECRET_KEY")

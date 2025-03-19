@@ -1,8 +1,5 @@
 from pymongo.mongo_client import MongoClient
-from dotenv import load_dotenv
 import os
-
-load_dotenv()
 
 # Constants from .env
 MONGO_URI = os.getenv("MONGO_URI")

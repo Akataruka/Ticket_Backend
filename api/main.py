@@ -33,14 +33,6 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
 # FastAPI App
 app = FastAPI()
 
-# @app.get("/")
-# def home():
-#     return {
-#         "sec_key": SECRET_KEY,
-#         "Algo" : ALGORITHM,
-#         "mongourl" : MONGO_URL,
-#     }
-
 
 # Helper Functions
 def verify_password(plain_password, hashed_password):

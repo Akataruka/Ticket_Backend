@@ -1,37 +1,41 @@
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-# from config.database import users_collection, tickets_collection
-# from models.ticket import Ticket
-# from models.user import User
-# from bson import ObjectId
-# from passlib.context import CryptContext
-# import jwt
-# import datetime
-# from typing import Optional
-# from pydantic import BaseModel, Field
+from config.database import users_collection, tickets_collection
+from models.ticket import Ticket
+from models.user import User
+from bson import ObjectId
+from passlib.context import CryptContext
+import jwt
+import datetime
+from typing import Optional
+from pydantic import BaseModel, Field
 # from dotenv import load_dotenv
-# import os
+import os
 
 
+
+# Load environment variables from .env file
+# load_dotenv()
+
+# Constants from .env
+SECRET_KEY = os.getenv("SECRET_KEY")
+ALGORITHM = os.getenv("ALGORITHM")
+MONGO_URL = os.getenv("MONGO_URL")
+
+# Password Hashing
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
+
+# FastAPI App
 app = FastAPI()
 
 @app.get("/")
 def home():
-    return "welcome to advaita backend"
-
-# # Load environment variables from .env file
-# load_dotenv()
-
-# # Constants from .env
-# SECRET_KEY = os.getenv("SECRET_KEY")
-# ALGORITHM = os.getenv("ALGORITHM")
-
-# # Password Hashing
-# pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
-
-# # FastAPI App
-# app = FastAPI()
+    return {
+        "sec_key": SECRET_KEY,
+        "Algo" : ALGORITHM,
+        "mongourl" : MONGO_URL,
+    }
 
 
 # # Helper Functions

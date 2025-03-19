@@ -92,11 +92,3 @@ def validate_code(code: str, current_user: dict = Depends(get_current_user)):
         return {"message": "Code already validated before"}
     tickets_collection.update_one({"_id": ticket["_id"]}, {"$set": {"validated_status": True}})
     return {"message": "Code validated successfully"}
-
-
-
-
-if __name__ == '__main__':
-    PORT = 8000
-    HOST = '0.0.0.0'
-    uvicorn.run('main:app', host = HOST, port = PORT, reload = True)

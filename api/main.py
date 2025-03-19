@@ -80,7 +80,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends()):
     if not user:
         raise HTTPException(status_code=400, detail="Incorrect username or password")
     access_token = create_access_token({"sub": user["name"], "role": user["role"]})
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer","role":user["role"]}
 
 @app.post("/validator/add_code")
 def add_code(ticket: Ticket, current_user: dict = Depends(get_current_user)):
